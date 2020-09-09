@@ -4,7 +4,7 @@
       <q-input
       @keyup.enter="addObject"
       v-model="newObject"
-      placeholder="Material, Preis"
+      label="Material hinzufügen"
       dense>
         <template v-slot:append>
           <q-btn
@@ -35,7 +35,7 @@
         </q-item-section>
         <q-item-section>
           <q-item-label>
-            {{ object.title }} - {{ object.price }}€
+            {{ object.title }}
           </q-item-label>
         </q-item-section>
         <q-item-section
@@ -57,7 +57,7 @@
       color="accent"
       />
       <div class="text-h6 text-primary text-center">
-        Kein Vermietmaterial
+        Kein Material
       </div>
     </div>
   </q-page>
@@ -71,18 +71,15 @@ export default {
       objects: [
         // {
         //   title: 'PA',
-        //   packed: false,
-        //   price: 200
+        //   packed: false
         // },
         // {
         //   title: 'LED',
-        //   packed: true,
-        //   price: 20
+        //   packed: true
         // },
         // {
         //   title: 'Nebel',
-        //   packed: false,
-        //   price: 30
+        //   packed: false
         // }
       ]
     }
@@ -99,12 +96,9 @@ export default {
       })
     },
     addObject () {
-      var newPrice = this.newObject.replace(/\D/g, '')
-      var newObjectName = JSON.stringify(this.newObject).replace(/[^A-Za-z-_]/g, '')
       this.objects.push({
-        title: newObjectName,
-        packed: false,
-        price: newPrice
+        title: this.newObject,
+        packed: false
       })
       this.newObject = ''
     }

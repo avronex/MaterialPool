@@ -8,11 +8,11 @@
       dense>
         <template v-slot:append>
           <q-btn
-          @click='addObject'
-          round
-          dense
-          flat
-          icon="add" />
+            @click='addObject'
+            icon="add"
+            dense
+            flat
+            round />
         </template>
       </q-input>
     </div>
@@ -57,7 +57,7 @@
       color="accent"
       />
       <div class="text-h6 text-primary text-center">
-        Kein Vermietmaterial
+        Kein Material
       </div>
     </div>
   </q-page>
