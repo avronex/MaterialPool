@@ -1,6 +1,6 @@
 {
   "name": "ee_material_pool",
-  "version": "1.0",
+  "version": "1.0.0",
   "description": "Webapp for material listing and material rent.",
   "productName": "EE-MaterialPool",
   "author": "Erik Elze <info@erikelze-events.de>",
