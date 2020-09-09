@@ -82,7 +82,7 @@ module.exports = function (/* ctx */) {
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-framework
     framework: {
       iconSet: 'material-icons', // Quasar icon set
-      lang: 'en-us', // Quasar language pack
+      lang: 'de', // Quasar language pack
       config: {},
 
       // Possible values for "importStrategy":
@@ -115,13 +115,13 @@ module.exports = function (/* ctx */) {
       workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
       workboxOptions: {}, // only for GenerateSW
       manifest: {
-        name: 'Quasar App',
-        short_name: 'Quasar App',
-        description: 'A Quasar Framework app',
+        name: 'EE-MaterialPool',
+        short_name: 'MaterialPool',
+        description: 'Webapp for material listing and material rent.',
         display: 'standalone',
         orientation: 'portrait',
-        background_color: '#ffffff',
-        theme_color: '#027be3',
+        background_color: '#313131',
+        theme_color: '#623d91',
         icons: [
           {
             src: 'icons/icon-128x128.png',
@@ -182,7 +182,7 @@ module.exports = function (/* ctx */) {
       builder: {
         // https://www.electron.build/configuration/configuration
 
-        appId: 'test'
+        appId: 'ee_material_pool'
       },
 
       // More info: https://quasar.dev/quasar-cli/developing-electron-apps/node-integration
