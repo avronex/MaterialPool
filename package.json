@@ -1,9 +1,9 @@
 {
-  "name": "test",
-  "version": "0.0.1",
-  "description": "A Quasar Framework app",
-  "productName": "Quasar App",
-  "author": "EE",
+  "name": "EE-MaterialPool",
+  "version": "1.0",
+  "description": "Webapp for material listing and material rent.",
+  "productName": "EE-MaterialPool",
+  "author": "Erik Elze <info@erikelze-events.de>",
   "private": true,
   "scripts": {
     "lint": "eslint --ext .js,.vue ./",
