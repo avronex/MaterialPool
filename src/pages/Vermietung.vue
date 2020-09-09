@@ -91,7 +91,7 @@ export default {
   methods: {
     deleteObject (index) {
       this.$q.dialog({
-        title: 'Confirm',
+        title: 'Bestätige',
         message: 'Material entfernen?',
         cancel: true,
         persistent: true
