@@ -2,7 +2,8 @@
 .thumbs.db
 node_modules
 package-lock.json
-src-electron
+/src-electron
+/.vscode
 
 # Quasar core related directories
 .quasar
