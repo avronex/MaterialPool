@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header class='shadow-5'>
+    <q-header class='bg-grey-10 shadow-3'>
       <q-toolbar>
         <q-btn
           flat
@@ -24,7 +24,7 @@
         :breakpoint="800"
         dark
       >
-        <q-scroll-area style="height: calc(100% - 150px); margin-top: 150px; border-right: 1px solid #ddd">
+        <q-scroll-area class='borders' style="height: calc(100% - 150px); margin-top: 150px;">
           <q-list padding>
             <q-item
               v-ripple
@@ -68,7 +68,7 @@
           </q-list>
         </q-scroll-area>
 
-        <q-img class="absolute-top bg-primary shadow-5" style="height: 150px">
+        <q-img class="absolute-top bg-grey-10 shadow-3 borders" style="height: 150px;">
           <div class="absolute-bottom bg-transparent">
             <q-avatar size="56px" class="q-mb-sm">
               <img src="https://cdn.quasar.dev/img/boy-avatar.png">
@@ -102,5 +102,8 @@ export default {
 .my-menu-link {
   color: white;
   background-color: $accent;
+}
+.borders {
+  border-right: 2px solid $accent;
 }
 </style>

@@ -1,11 +1,13 @@
 <template>
-  <q-page class='bg-grey-3 column'>
-    <div class="bg-white q-pa-sm">
+  <q-page class='bg-dark column'>
+    <div class="bg-dark q-pa-sm">
       <q-input
       @keyup.enter="addObject"
       v-model="newObject"
       label="Material hinzufügen"
-      dense>
+      standout="bg-grey-3 text-grey-10"
+      dense
+      dark>
         <template v-slot:append>
           <q-btn
           @click='addObject'
@@ -17,21 +19,20 @@
       </q-input>
     </div>
     <q-list
-      class='bg-white'
-      separator
-      bordered>
+      class='bg-grey-3'
+      separator>
       <q-item
         v-for='(object, index) in objects'
         :key='object.title'
         @click='object.packed = !object.packed'
-        :class="{ 'packed bg-grey-3' : object.packed }"
+        :class="{ 'packed bg-secondary text-grey-3' : object.packed }"
         clickable
         v-ripple>
         <q-item-section avatar>
           <q-checkbox
           v-model="object.packed"
           class="no-pointer-events"
-          color="secondary" />
+          color="accent" />
         </q-item-section>
         <q-item-section>
           <q-item-label>
@@ -45,7 +46,7 @@
           @click.stop='deleteObject(index)'
           flat
           round
-          color="primary"
+          color="grey-3"
           icon="delete" />
         </q-item-section>
       </q-item>
@@ -56,7 +57,7 @@
       size="100px"
       color="accent"
       />
-      <div class="text-h6 text-primary text-center">
+      <div class="text-h6 text-grey-1 text-center">
         Kein Material
       </div>
     </div>
@@ -69,18 +70,18 @@ export default {
     return {
       newObject: '',
       objects: [
-        // {
-        //   title: 'PA',
-        //   packed: false
-        // },
-        // {
-        //   title: 'LED',
-        //   packed: true
-        // },
-        // {
-        //   title: 'Nebel',
-        //   packed: false
-        // }
+/*          {
+           title: 'PA',
+           packed: false
+         },
+         {
+           title: 'LED',
+           packed: true
+         },
+         {
+           title: 'Nebel',
+          packed: false
+         } */
       ]
     }
   },
