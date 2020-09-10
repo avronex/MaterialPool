@@ -51,6 +51,9 @@
         </q-item-section>
       </q-item>
     </q-list>
+    <div class="text-center fixed-bottom-center q-ma-md">
+      <q-btn @click.stop='deleteAllObjects(index)' class='shadow-5 absolute-bottom-right q-ma-lg' dark round color="primary" icon="delete" />
+    </div>
     <div v-if="!objects.length" class="no-objects text-center absolute-center">
       <q-icon
       name="check"
@@ -108,6 +111,16 @@ export default {
         price: newPrice
       })
       this.newObject = ''
+    },
+    deleteAllObjects () {
+      this.$q.dialog({
+        title: 'Alle löschen',
+        message: 'Alle Materialien entfernen!?',
+        cancel: true,
+        persistent: true
+      }).onOk(() => {
+        this.objects.splice(0)
+      })
     }
   }
 }

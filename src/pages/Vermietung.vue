@@ -51,10 +51,11 @@
         </q-item-section>
       </q-item>
     </q-list>
-    <div class="text-center absolute-bottom q-ma-lg">
-      <q-chip size="xl" icon="euro_symbol">
+    <div class="text-center fixed-bottom-center q-ma-md">
+      <q-chip v-if="objects.length" class='shadow-5' size="xl" icon="euro_symbol">
         {{ sumObjects }}
       </q-chip>
+      <q-btn @click.stop='deleteAllObjects(index)' class='shadow-5 absolute-bottom-right q-ma-lg' dark round color="primary" icon="delete" />
     </div>
     <div v-if="!objects.length" class="no-objects text-center absolute-center">
       <q-icon
@@ -75,7 +76,7 @@ export default {
     return {
       newObject: '',
       objects: [
-         {
+/*          {
            title: 'PA',
            packed: false,
            price: 200
@@ -89,14 +90,14 @@ export default {
            title: 'Nebel',
            packed: false,
            price: 30
-         }
+         } */
       ]
     }
   },
   methods: {
     deleteObject (index) {
       this.$q.dialog({
-        title: 'Bestätige',
+        title: 'Löschen',
         message: 'Material entfernen?',
         cancel: true,
         persistent: true
@@ -105,7 +106,7 @@ export default {
       })
     },
     addObject () {
-      var newPrice = this.newObject.replace(/\D/g, '')
+      var newPrice = parseInt(this.newObject.replace(/[^0-9]/g, ''))
       var newObjectName = JSON.stringify(this.newObject).replace(/[^A-Za-z-_]/g, '')
       this.objects.push({
         title: newObjectName,
@@ -113,14 +114,22 @@ export default {
         price: newPrice
       })
       this.newObject = ''
+    },
+    deleteAllObjects () {
+      this.$q.dialog({
+        title: 'Alle löschen',
+        message: 'Alle Materialien entfernen!?',
+        cancel: true,
+        persistent: true
+      }).onOk(() => {
+        this.objects.splice(0)
+      })
     }
   },
   computed: {
     sumObjects () {
-      var packedObjects = objects.filter(object => (object.packed === true));
-      var total = check_orders.reduce(function(prev, cur) {
-        return prev + (cur.price);
-      }, 0);
+      var packedObjects = this.objects.filter(object => (object.packed === true));
+      var total = packedObjects.reduce((all, add) => all + add.price, 0);
       return total;
      }
   }
