@@ -51,6 +51,11 @@
         </q-item-section>
       </q-item>
     </q-list>
+    <div class="text-center absolute-bottom q-ma-lg">
+      <q-chip size="xl" icon="euro_symbol">
+        {{ calcPrice }}
+      </q-chip>
+    </div>
     <div v-if="!objects.length" class="no-objects text-center absolute-center">
       <q-icon
       name="check"
@@ -68,9 +73,10 @@
 export default {
   data () {
     return {
+      calcPrice: 100,
       newObject: '',
       objects: [
-/*          {
+         {
            title: 'PA',
            packed: false,
            price: 200
@@ -84,7 +90,7 @@ export default {
            title: 'Nebel',
            packed: false,
            price: 30
-         } */
+         }
       ]
     }
   },
