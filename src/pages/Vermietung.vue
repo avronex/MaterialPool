@@ -53,7 +53,7 @@
     </q-list>
     <div class="text-center absolute-bottom q-ma-lg">
       <q-chip size="xl" icon="euro_symbol">
-        {{ calcPrice }}
+        {{ sumObjects }}
       </q-chip>
     </div>
     <div v-if="!objects.length" class="no-objects text-center absolute-center">
@@ -73,7 +73,6 @@
 export default {
   data () {
     return {
-      calcPrice: 100,
       newObject: '',
       objects: [
          {
@@ -115,6 +114,15 @@ export default {
       })
       this.newObject = ''
     }
+  },
+  computed: {
+    sumObjects () {
+      var packedObjects = objects.filter(object => (object.packed === true));
+      var total = check_orders.reduce(function(prev, cur) {
+        return prev + (cur.price);
+      }, 0);
+      return total;
+     }
   }
 }
 </script>
