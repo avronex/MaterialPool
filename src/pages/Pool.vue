@@ -3,14 +3,15 @@
     <div class="bg-dark q-pa-sm">
       <q-input
       dark
-      @keyup.enter="addObject"
+      @keyup.enter="validateForm"
       v-model="newObject"
       placeholder="Material, Preis"
       dense
-      standout="bg-grey-3 text-grey-10">
+      standout="bg-grey-3 text-grey-10"
+      >
         <template v-slot:append>
           <q-btn
-            @click='addObject'
+            @click='validateForm'
             icon="add"
             dense
             flat
@@ -121,6 +122,18 @@ export default {
       }).onOk(() => {
         this.objects.splice(0)
       })
+    },
+    validateForm () {
+      if (this.newObject == "") {
+        this.$q.notify({
+          message: 'Textfeld leer!',
+          icon: 'announcement',
+          color: 'accent'
+        });
+      }
+      else {
+        this.addObject();
+      }
     }
   }
 }
@@ -129,4 +142,8 @@ export default {
 .no-objects {
   opacity: 0.5;
 }
+
+/* input:invalid {
+  color: red !important;
+} */
 </style>
