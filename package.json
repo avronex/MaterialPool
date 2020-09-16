@@ -6,7 +6,6 @@
   "author": "Erik Elze <info@erikelze-events.de>",
   "private": true,
   "scripts": {
-    "npm install": "npm i",
     "dev": "quasar dev",
     "lint": "eslint --ext .js,.vue ./",
     "build": "quasar build"
