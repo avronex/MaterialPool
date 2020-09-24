@@ -1,15 +1,28 @@
 <template>
   <q-page class='bg-dark column'>
-    <div class="bg-dark q-pa-sm">
+    <div class="bg-dark q-pa-sm row">
       <q-input
+      class="q-pr-sm"
       dark
       @keyup.enter="validateForm"
       v-model="newObject"
-      placeholder="Material, Preis"
+      placeholder="Material"
       dense
       standout="bg-grey-3 text-grey-10"
+      style="min-width: 20%;"
       >
-        <template v-slot:append>
+      </q-input>
+      <q-input
+      dark
+      @keyup.enter="validateForm"
+      v-model="newPrice"
+      placeholder="Preis"
+      type="number"
+      dense
+      standout="bg-grey-3 text-grey-10"
+      style="min-width: 20%;"
+      >
+        <template v-slot:after>
           <q-btn
             @click='validateForm'
             icon="add"
@@ -19,6 +32,7 @@
         </template>
       </q-input>
     </div>
+
     <q-list
       class='bg-grey-3'
       separator>
@@ -72,6 +86,7 @@
 export default {
   data () {
     return {
+      newPrice: '',
       newObject: '',
       objects: [
 /*          {
@@ -104,14 +119,15 @@ export default {
       })
     },
     addObject () {
-      var newPrice = this.newObject.replace(/\D/g, '')
-      var newObjectName = JSON.stringify(this.newObject).replace(/[^A-Za-z-_]/g, '')
+      var objPrice = this.newPrice.replace(/\D/g, '')
+      var newObjectName = JSON.stringify(this.newObject).replace(/[^0-9A-Za-z-_\s]/g, '')
       this.objects.push({
         title: newObjectName,
         packed: false,
-        price: newPrice
+        price: objPrice
       })
       this.newObject = ''
+      this.newPrice = ''
     },
     deleteAllObjects () {
       this.$q.dialog({
