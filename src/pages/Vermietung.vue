@@ -94,6 +94,7 @@ export default {
       ]
     }
   },
+
   methods: {
     deleteObject (index) {
       this.$q.dialog({
@@ -107,8 +108,8 @@ export default {
     },
     addObject () {
       var newPrice = parseInt(this.newObject.replace(/[^0-9]/g, ''))
-      var newObjectName = JSON.stringify(this.newObject).replace(/[^A-Za-z-_]/g, '')
-      this.objects.push({
+      var newObjectName = JSON.stringify(this.newObject).replace(/[^0-9A-Za-z-_\s]/g, '')
+      this.objects.push({ 
         title: newObjectName,
         packed: false,
         price: newPrice
@@ -138,6 +139,7 @@ export default {
       }
     }
   },
+
   computed: {
     sumObjects () {
       var packedObjects = this.objects.filter(object => (object.packed === true));

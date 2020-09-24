@@ -9,7 +9,7 @@
       placeholder="Material"
       dense
       standout="bg-grey-3 text-grey-10"
-      style="min-width: 20%;"
+      style="width: 50%;"
       >
       </q-input>
       <q-input
@@ -17,10 +17,11 @@
       @keyup.enter="validateForm"
       v-model="newPrice"
       placeholder="Preis"
+      suffix="€"
       type="number"
       dense
       standout="bg-grey-3 text-grey-10"
-      style="min-width: 20%;"
+      style="width: 50%;"
       >
         <template v-slot:after>
           <q-btn
@@ -67,6 +68,9 @@
       </q-item>
     </q-list>
     <div class="text-center fixed-bottom-center q-ma-md">
+      <q-chip v-if="objects.length" class='shadow-5' size="xl" icon="euro_symbol">
+        {{ sumObjects }}
+      </q-chip>
       <q-btn @click.stop='deleteAllObjects(index)' class='shadow-5 absolute-bottom-right q-ma-lg' dark round color="primary" icon="delete" />
     </div>
     <div v-if="!objects.length" class="no-objects text-center absolute-center">
@@ -107,6 +111,7 @@ export default {
       ]
     }
   },
+
   methods: {
     deleteObject (index) {
       this.$q.dialog({
@@ -119,7 +124,7 @@ export default {
       })
     },
     addObject () {
-      var objPrice = this.newPrice.replace(/\D/g, '')
+      var objPrice = parseInt(this.newPrice.replace(/\D/g, ''))
       var newObjectName = JSON.stringify(this.newObject).replace(/[^0-9A-Za-z-_\s]/g, '')
       this.objects.push({
         title: newObjectName,
@@ -140,9 +145,9 @@ export default {
       })
     },
     validateForm () {
-      if (this.newObject == "") {
+      if (this.newObject == "" || this.newPrice == "") {
         this.$q.notify({
-          message: 'Textfeld leer!',
+          message: 'Feld leer!',
           icon: 'announcement',
           color: 'accent'
         });
@@ -151,7 +156,15 @@ export default {
         this.addObject();
       }
     }
-  }
+  },
+
+  computed: {
+    sumObjects () {
+      var packedObjects = this.objects.filter(object => (object.packed === true));
+      var total = packedObjects.reduce((all, add) => all + add.price, 0);
+      return total;
+    },
+  },
 }
 </script>
 <style lang='scss'>
