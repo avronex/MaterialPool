@@ -28,6 +28,8 @@ Endpoint
 */
 
   app.get('/objects', (request, response) => {
+    response.set('Access-Control-Allow-Origin', '*')
+
     let objects = []
     db.collection('objects').get().then(snapshot => {
       snapshot.forEach((doc) => {

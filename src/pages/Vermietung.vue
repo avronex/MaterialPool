@@ -71,6 +71,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   data () {
     return {
@@ -96,6 +97,13 @@ export default {
   },
 
   methods: {
+    takeObjects() {
+      this.$axios.get('http://localhost:3000/objects').then(response => {
+        console.log('response: ', response)
+      }).catch(err => {
+        console.log('err: ', err)
+      })
+    },
     deleteObject (index) {
       this.$q.dialog({
         title: 'Löschen',
@@ -138,6 +146,11 @@ export default {
         this.addObject();
       }
     }
+  },
+
+  created() {
+    let self=this;
+    this.takeObjects()
   },
 
   computed: {
