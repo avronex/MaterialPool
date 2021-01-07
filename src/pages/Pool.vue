@@ -92,27 +92,21 @@ export default {
     return {
       newPrice: '',
       newObject: '',
-      objects: [
-/*          {
-           title: 'PA',
-           packed: false,
-           price: 200
-         },
-         {
-           title: 'LED',
-           packed: false,
-           price: 20
-         },
-         {
-          title: 'Nebel',
-          packed: true,
-          price: 30
-         } */
-      ]
+      objects: []
     }
   },
 
   methods: {
+    getObjects() {
+      this.$axios.get(`${ process.env.API }/objects`).then(response => {
+        this.objects = response.data
+      }).catch(err => {
+        this.$q.dialog({
+          title: 'Error',
+          message: 'Could not connect to database'
+        })
+      })
+    },
     deleteObject (index) {
       this.$q.dialog({
         title: 'Bestätige',
@@ -126,11 +120,16 @@ export default {
     addObject () {
       var objPrice = parseInt(this.newPrice.replace(/\D/g, ''))
       var newObjectName = JSON.stringify(this.newObject).replace(/[^0-9A-Za-z-_\s]/g, '')
-      this.objects.push({
-        title: newObjectName,
-        packed: false,
-        price: objPrice
+
+      let formData = new FormData()
+      formData.append('title', newObjectName)
+      formData.append('price', objPrice)
+      formData.append('packed', false)
+
+      this.$axios.post(`${ process.env.API }/addObject`, formData).then(response => {
+        console.log('response', response)
       })
+
       this.newObject = ''
       this.newPrice = ''
     },
@@ -156,6 +155,10 @@ export default {
         this.addObject();
       }
     }
+  },
+
+  created() {
+    this.getObjects()
   },
 
   computed: {

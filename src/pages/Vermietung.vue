@@ -71,37 +71,23 @@
 </template>
 
 <script>
-import axios from 'axios'
 export default {
   data () {
     return {
       newObject: '',
-      objects: [
-/*          {
-           title: 'PA',
-           packed: false,
-           price: 200
-         },
-         {
-           title: 'LED',
-           packed: true,
-           price: 20
-         },
-         {
-           title: 'Nebel',
-           packed: false,
-           price: 30
-         } */
-      ]
+      objects: [],
     }
   },
 
   methods: {
-    takeObjects() {
-      this.$axios.get('http://localhost:3000/objects').then(response => {
-        console.log('response: ', response)
+    getObjects() {
+      this.$axios.get(`${ process.env.API }/objects`).then(response => {
+        this.objects = response.data
       }).catch(err => {
-        console.log('err: ', err)
+        this.$q.dialog({
+          title: 'Error',
+          message: 'Could not connect to database'
+        })
       })
     },
     deleteObject (index) {
@@ -117,11 +103,16 @@ export default {
     addObject () {
       var newPrice = parseInt(this.newObject.replace(/[^0-9]/g, ''))
       var newObjectName = JSON.stringify(this.newObject).replace(/[^0-9A-Za-z-_\s]/g, '')
-      this.objects.push({ 
-        title: newObjectName,
-        packed: false,
-        price: newPrice
+
+      let formData = new FormData()
+      formData.append('title', newObjectName)
+      formData.append('price', newPrice)
+      formData.append('packed', false)
+
+      this.$axios.post(`${ process.env.API }/addObject`, formData).then(response => {
+        console.log('response', response)
       })
+
       this.newObject = ''
     },
     deleteAllObjects () {
@@ -149,8 +140,7 @@ export default {
   },
 
   created() {
-    let self=this;
-    this.takeObjects()
+    this.getObjects()
   },
 
   computed: {
