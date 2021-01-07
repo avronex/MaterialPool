@@ -15,7 +15,7 @@ Endpoint
 */
 
   app.get('/', (request, response) => {
-    response.send('Test!')
+    response.send('Hallo!')
   })
 
 /* 
